@@ -2038,6 +2038,39 @@ function renderAnalytics(){
 }
 
 // ═════════════════════════════════════════════
+//  SETTINGS
+// ═════════════════════════════════════════════
+function renderSettings(){
+  const u = currentUser();
+  const t = currentTeam();
+  const p = (t && t.profile) || {};
+  const showEdit = (isLeader() || isSuperAdmin()) && t;
+  document.getElementById('page-settings').innerHTML = `
+    <div class="page-header"><div><h1 class="page-title">Settings</h1><div class="page-sub">Your organization profile and account</div></div></div>
+    ${t ? `<div class="settings-card">
+      <div class="section-title" style="margin-bottom:10px">Organization Profile</div>
+      <div class="settings-row"><div class="settings-label">Name</div><div class="settings-value">${p.orgName || '—'}</div></div>
+      <div class="settings-row"><div class="settings-label">State of Incorporation</div><div class="settings-value">${STATES[p.state] || p.state || '—'}</div></div>
+      <div class="settings-row"><div class="settings-label">Fiscal Year End</div><div class="settings-value">${p.fye || '—'}</div></div>
+      <div class="settings-row"><div class="settings-label">Team Code</div><div class="settings-value"><code style="font-family:'Courier New',monospace;background:var(--light);padding:2px 8px;border-radius:4px">${t.id}</code></div></div>
+      <div class="settings-row"><div class="settings-label">Plan</div><div class="settings-value">${t.isPro ? '✓ Pro' : 'Free (3 seats max)'}</div></div>
+      ${showEdit ? '<div style="margin-top:14px"><button class="btn btn-outline" onclick="startOnboarding()">Edit organization →</button></div>' : '<div style="font-size:12px;color:var(--muted);margin-top:10px">Only the team leader can edit the org profile.</div>'}
+    </div>` : ''}
+    <div class="settings-card">
+      <div class="section-title" style="margin-bottom:10px">Account</div>
+      <div class="settings-row"><div class="settings-label">Name</div><div class="settings-value">${u.name}${u.isSuperAdmin ? ' · super-admin' : ''}</div></div>
+      <div class="settings-row"><div class="settings-label">Email</div><div class="settings-value">${state.currentEmail}</div></div>
+      <div style="margin-top:14px"><button class="btn btn-outline" onclick="signOut()">Sign out</button></div>
+    </div>
+    <div class="settings-card">
+      <div class="section-title" style="margin-bottom:10px">Reset Demo</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Clear all local data and start fresh. Useful for showing the demo from scratch.</p>
+      <button class="btn btn-outline" onclick="if(confirm('Clear all demo data?')){localStorage.removeItem('bya_handbook_v1');location.reload();}">Reset all demo data</button>
+    </div>
+  `;
+}
+
+// ═════════════════════════════════════════════
 //  ADMIN PAGE (super-admin only)
 // ═════════════════════════════════════════════
 function renderAdmin(){
