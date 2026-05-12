@@ -1063,7 +1063,7 @@ function deleteAction(id){
 // ═════════════════════════════════════════════
 function renderDashboard(){
   const t = currentTeam();
-  if (!t) { document.getElementById('page-dashboard').innerHTML = '<div class="empty-state">No team selected.</div>'; return; }
+  if (!t) { document.getElementById('page-dashboard').innerHTML = '<div class="empty-state" style="padding:60px 30px"><div style="font-size:36px;margin-bottom:14px">🏛️</div><div style="font-size:16px;color:var(--navy);font-weight:600;margin-bottom:6px">No team selected</div><div style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">You're signed in as a super-admin, which means you don't have a team of your own — you view other teams' data. Pick a team from the Admin Console, or sign out and sign in as a regular user.</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn btn-teal" onclick="navigate('admin')">Go to Admin Console →</button><button class="btn btn-outline" onclick="signOut()">Sign out</button></div></div>'; return; }
   const c = hbCompleteness();
   const s = saSummary();
   const actions = actionItems();
@@ -1104,7 +1104,7 @@ function renderDashboard(){
 // ═════════════════════════════════════════════
 function renderAssess(){
   const t = currentTeam();
-  if (!t) { document.getElementById('page-assess').innerHTML = '<div class="empty-state">No team selected.</div>'; return; }
+  if (!t) { document.getElementById('page-assess').innerHTML = '<div class="empty-state" style="padding:60px 30px"><div style="font-size:36px;margin-bottom:14px">🏛️</div><div style="font-size:16px;color:var(--navy);font-weight:600;margin-bottom:6px">No team selected</div><div style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">You're signed in as a super-admin, which means you don't have a team of your own — you view other teams' data. Pick a team from the Admin Console, or sign out and sign in as a regular user.</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn btn-teal" onclick="navigate('admin')">Go to Admin Console →</button><button class="btn btn-outline" onclick="signOut()">Sign out</button></div></div>'; return; }
   const s = saSummary();
   const opts = [
     {v:'yes', label:'Yes', cls:'badge-green'},
@@ -1849,7 +1849,7 @@ function renderBuild(){
 function renderTeam(){
   const u = currentUser();
   const t = currentTeam();
-  if (!t){ document.getElementById('page-team').innerHTML = '<div class="empty-state">No team selected.</div>'; return; }
+  if (!t){ document.getElementById('page-team').innerHTML = '<div class="empty-state" style="padding:60px 30px"><div style="font-size:36px;margin-bottom:14px">🏛️</div><div style="font-size:16px;color:var(--navy);font-weight:600;margin-bottom:6px">No team selected</div><div style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">You're signed in as a super-admin, which means you don't have a team of your own — you view other teams' data. Pick a team from the Admin Console, or sign out and sign in as a regular user.</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn btn-teal" onclick="navigate('admin')">Go to Admin Console →</button><button class="btn btn-outline" onclick="signOut()">Sign out</button></div></div>'; return; }
   const members = Object.entries(t.members||{}).map(([email, role]) => {
     const usr = state.users[email];
     return { email, role, name: (usr && usr.name) || email };
@@ -1929,7 +1929,7 @@ const STATUS_COLOR = { not_started:'badge-grey', in_progress:'badge-amber', file
 
 function renderHistory(){
   const t = currentTeam();
-  if (!t){ document.getElementById('page-history').innerHTML = '<div class="empty-state">No team selected.</div>'; return; }
+  if (!t){ document.getElementById('page-history').innerHTML = '<div class="empty-state" style="padding:60px 30px"><div style="font-size:36px;margin-bottom:14px">🏛️</div><div style="font-size:16px;color:var(--navy);font-weight:600;margin-bottom:6px">No team selected</div><div style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">You're signed in as a super-admin, which means you don't have a team of your own — you view other teams' data. Pick a team from the Admin Console, or sign out and sign in as a regular user.</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn btn-teal" onclick="navigate('admin')">Go to Admin Console →</button><button class="btn btn-outline" onclick="signOut()">Sign out</button></div></div>'; return; }
   const history = t.history || [];
   const fmtDate = (iso) => { try { return new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}); } catch(e){ return iso; } };
   const userLabel = (email) => { const u = state.users[email]; return u ? u.name : email; };
@@ -1966,7 +1966,7 @@ function renderHistory(){
 // ═════════════════════════════════════════════
 function renderAnalytics(){
   const t = currentTeam();
-  if (!t){ document.getElementById('page-analytics').innerHTML = '<div class="empty-state">No team selected.</div>'; return; }
+  if (!t){ document.getElementById('page-analytics').innerHTML = '<div class="empty-state" style="padding:60px 30px"><div style="font-size:36px;margin-bottom:14px">🏛️</div><div style="font-size:16px;color:var(--navy);font-weight:600;margin-bottom:6px">No team selected</div><div style="font-size:13px;color:var(--muted);margin-bottom:18px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6">You're signed in as a super-admin, which means you don't have a team of your own — you view other teams' data. Pick a team from the Admin Console, or sign out and sign in as a regular user.</div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn btn-teal" onclick="navigate('admin')">Go to Admin Console →</button><button class="btn btn-outline" onclick="signOut()">Sign out</button></div></div>'; return; }
   const items = compileItems();
   if (!items.length){ document.getElementById('page-analytics').innerHTML = '<div class="empty-state">No items to analyze yet.</div>'; return; }
 
@@ -2160,4 +2160,3 @@ if (state.currentEmail && state.users[state.currentEmail]){
 </script>
 </body>
 </html>
-
