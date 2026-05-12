@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Board Handbook Builder — User Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1B3A5C;--teal:#2A7B6F;--gold:#D4A017;--bg:#f0f4f8;--white:#fff;--border:#e2e8f0;--text:#1a1a2e;--muted:#64748b;--light:#f8fafc;--red:#c0392b;--green:#2d7a4f}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{background:var(--navy);color:#fff;padding:14px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.topbar .mark{width:34px;height:34px;background:var(--teal);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px}
+.topbar .title{font-size:15px;font-weight:700;flex:1}
+.topbar .title span{font-size:11px;font-weight:400;color:rgba(255,255,255,.6);display:block;line-height:1.2}
+.topbar a{color:#fff;font-size:13px;padding:8px 14px;border:1px solid rgba(255,255,255,.25);border-radius:8px;font-weight:600;background:rgba(255,255,255,.06)}
+.topbar a:hover{background:rgba(255,255,255,.12);text-decoration:none}
+.layout{display:grid;grid-template-columns:240px 1fr;max-width:1200px;margin:0 auto;gap:28px;padding:28px 24px 60px}
+.toc{position:sticky;top:78px;align-self:start;background:#fff;border:1px solid var(--border);border-radius:14px;padding:18px;max-height:calc(100vh - 100px);overflow-y:auto}
+.toc-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.toc a{display:block;padding:6px 10px;font-size:13px;color:var(--text);border-radius:6px;font-weight:500;margin-bottom:2px}
+.toc a:hover{background:var(--light);color:var(--navy);text-decoration:none}
+.toc a.active{background:rgba(42,123,111,.1);color:var(--teal);font-weight:600}
+.main{background:#fff;border:1px solid var(--border);border-radius:14px;padding:40px}
+.hero{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;padding:32px;border-radius:14px;margin-bottom:28px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:8px}
+.hero p{font-size:15px;opacity:.92}
+h2{font-size:24px;color:var(--navy);margin:36px 0 12px;font-weight:700;scroll-margin-top:80px}
+h2:first-of-type{margin-top:0}
+h3{font-size:17px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+p{margin-bottom:12px}
+ul,ol{margin:0 0 14px 22px}
+li{margin-bottom:6px}
+.callout{background:var(--light);border-left:4px solid var(--teal);padding:14px 18px;border-radius:8px;margin:14px 0;font-size:14px}
+.callout.warn{background:#fff7d6;border-color:var(--gold);color:#5c4400}
+.callout.tip{background:#e6f4f1;border-color:var(--teal)}
+.callout b{color:var(--navy)}
+code{background:var(--light);padding:1px 6px;border-radius:4px;font-family:'Courier New',monospace;font-size:13px;color:var(--navy);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+th{background:var(--light);color:var(--navy);font-weight:700}
+.role-pill{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.04em;display:inline-block;margin-left:6px}
+.pill-leader{background:#dbeafe;color:var(--navy)}
+.pill-member{background:#eef2f7;color:var(--muted)}
+.pill-admin{background:#fde8e6;color:var(--red)}
+@media(max-width:900px){
+  .layout{grid-template-columns:1fr;gap:14px;padding:18px 14px 40px}
+  .toc{position:static;max-height:none;order:2}
+  .main{padding:22px;order:1}
+  .hero{padding:22px}
+  .hero h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="mark">B</div>
+  <div class="title">Build Your Club Academy<span>Board Handbook Builder — User Guide</span></div>
+  <a href="/">← Back to App</a>
+</div>
+
+<div class="layout">
+  <aside class="toc">
+    <div class="toc-title">In This Guide</div>
+    <a href="#what">What is this tool?</a>
+    <a href="#start">Getting started</a>
+    <a href="#workflow">Recommended workflow</a>
+    <a href="#assess">Self-Assessment</a>
+    <a href="#about">About the Organization</a>
+    <a href="#people">Board & Officers</a>
+    <a href="#policies">Policies</a>
+    <a href="#procedures">Procedures</a>
+    <a href="#committees">Committees</a>
+    <a href="#programs">Programs & Donors</a>
+    <a href="#financials">Financials</a>
+    <a href="#docs">Document Inventory</a>
+    <a href="#actions">Action Items</a>
+    <a href="#build">Build Handbook</a>
+    <a href="#team">Team collaboration</a>
+    <a href="#pro">Pro vs Free</a>
+    <a href="#admin">For administrators</a>
+    <a href="#nav">Navigation: Sign Out & Back</a>
+    <a href="#tips">Tips & best practices</a>
+    <a href="#disclaimer">Disclaimer</a>
+  </aside>
+
+  <article class="main">
+    <div class="hero">
+      <h1>Board Handbook Builder</h1>
+      <p>A guided workflow that turns your organization's content into a polished board handbook — ready to print as a PDF or download as a Word document.</p>
+    </div>
+
+    <h2 id="what">What is this tool?</h2>
+    <p>The Board Handbook Builder walks you through gathering everything a board handbook needs — mission and history, board roster, officer roles, five governance policies, board procedures, programs and donors, a 3-year financial summary, and a document inventory — then assembles all of it into a polished handbook you can adopt and distribute.</p>
+    <p>The tool is built around the same content as the printed <i>Board Handbook Template</i> and its companion workbook, but in interactive form so you can fill it in over multiple sessions, collaborate with teammates, and regenerate the finished handbook whenever your information changes.</p>
+
+    <h2 id="start">Getting started</h2>
+    <ol>
+      <li>Click <b>Create Account</b> on the sign-in screen and enter your name, email, and password.</li>
+      <li>On the next screen, choose <b>Start a new organization</b> if this is your first handbook, or <b>Join an existing team</b> if a teammate has shared a 6-character team code.</li>
+      <li>The onboarding wizard asks for two things: your organization's legal name, and your state of incorporation plus fiscal year end. That's all you need to get started.</li>
+    </ol>
+    <div class="callout tip"><b>Demo accounts:</b> If you want to explore before setting up your own org, sign in as <code>demo@example.org</code> / <code>demo</code>. The demo team comes pre-populated with sample data so you can immediately preview a completed handbook.</div>
+
+    <h2 id="workflow">Recommended workflow</h2>
+    <p>You don't have to do this in order, but if you're new to the tool, this sequence works well:</p>
+    <ol>
+      <li><b>Run the Self-Assessment</b> first (15–20 minutes). It surfaces what you already have, what needs updating, and what's missing.</li>
+      <li><b>Fill in About the Organization</b> — the narrative basics. Mission, vision, values, history, strategic priorities.</li>
+      <li><b>Add your Board & Officers</b> — roster, officer election history, key staff, professional advisors.</li>
+      <li><b>Mark Policies adopted</b> — five standard policies use boilerplate text out of the box. You can customize each one.</li>
+      <li><b>Set Procedures</b> — meeting cadence, quorum, voting threshold, attendance.</li>
+      <li><b>Fill in Committees, Programs & Donors, Financials, Doc Inventory</b> — the supporting detail.</li>
+      <li><b>Work through your Action Items</b> — the self-assessment auto-populates these.</li>
+      <li><b>Build the Handbook</b> — preview as HTML or download as .docx whenever you're ready.</li>
+    </ol>
+
+    <h2 id="assess">Self-Assessment</h2>
+    <p>22 questions across 5 categories: Foundational Documents, Board Composition & Records, Policies, Financial & Tax, Operations & Communication. Each question has four answers: <b>Yes</b>, <b>Partial</b>, <b>No</b>, or <b>Don't know</b>.</p>
+    <p>Selecting Partial, No, or Don't know automatically creates an action item, so you don't have to remember what needs follow-up. Yes answers don't create anything — they're just acknowledged.</p>
+    <div class="callout"><b>The assessment is not graded.</b> Honest answers are more useful than aspirational ones. The goal is to build a punch list, not to look good.</div>
+
+    <h2 id="about">About the Organization</h2>
+    <p>Captures everything that goes into Part I of the handbook: legal name, EIN, state of incorporation, date of incorporation, fiscal year end, address and contact info, mission statement, vision statement, core values, and strategic priorities.</p>
+    <p>Use the mission and vision fields as full sentences (not just phrases). The core values and strategic priorities accept one entry per line.</p>
+
+    <h2 id="people">Board & Officers</h2>
+    <p>Four tables that populate Part II of the handbook:</p>
+    <ul>
+      <li><b>Board of Directors Roster</b> — names, roles, term dates, contact, committee assignments. Keep this current.</li>
+      <li><b>Officer Election History</b> — a record of who held each office, when. Helpful for continuity and Form 990.</li>
+      <li><b>Executive Director & Key Staff</b> — names, titles, contact info, start dates.</li>
+      <li><b>Professional Advisors</b> — outside counsel, CPA, banker, insurance broker, etc.</li>
+    </ul>
+
+    <h2 id="policies">Policies</h2>
+    <p>Five standard policies expected by IRS Form 990:</p>
+    <ul>
+      <li><b>Conflict of Interest</b> — the IRS publishes a recommended model; ours is based on that.</li>
+      <li><b>Whistleblower</b> — required for federal-fund recipients; recommended for all.</li>
+      <li><b>Document Retention &amp; Destruction</b> — standard retention schedule.</li>
+      <li><b>Gift Acceptance</b> — what gifts you'll and won't accept.</li>
+      <li><b>Executive Compensation</b> — protects against IRS Section 4958 exposure.</li>
+    </ul>
+    <p>Each policy has a checkbox for <b>Adopted by the board</b> and an adoption date. Click "View boilerplate policy text" to see the default language — leave the Custom field blank to use it as-is, or paste a customized version that will replace the boilerplate in the final handbook.</p>
+    <div class="callout warn"><b>Reminder:</b> the boilerplate texts are starting points. Have legal counsel review before adopting, especially if your state has specific requirements.</div>
+
+    <h2 id="procedures">Procedures</h2>
+    <p>Part IV of the handbook. Covers meeting frequency, notice requirements, quorum, voting thresholds, attendance expectations, action without a meeting, confidentiality, and how the board communicates between meetings.</p>
+
+    <h2 id="committees">Committees</h2>
+    <p>Each committee gets a row: name, chair, members, meeting cadence, and a brief charter note. Common committees: Executive, Finance/Audit, Governance/Nominating, Development/Fundraising, Program. You only need to list the committees you actually have.</p>
+
+    <h2 id="programs">Programs & Donors</h2>
+    <p>Two tables — programs you operate and major donors/funders you want to recognize in the handbook. The Donors table is internal-use; you control how donors are recognized in the final handbook through the Recognition Preference field (some donors prefer to remain anonymous).</p>
+
+    <h2 id="financials">Financials</h2>
+    <p>A multi-year summary (revenue, expenses, net assets) across three fiscal years. Label each column with the year you want to display (e.g., "FY 2022"). The handbook prints this exactly as you enter it — no auto-calculation, but the layout matches what most board packets expect.</p>
+
+    <h2 id="docs">Document Inventory</h2>
+    <p>Internal reference: where every governance document is stored, who owns it, when it was last reviewed. Starts with 10 standard documents (Articles, Bylaws, IRS determination, 990, D&O policy, audit, board minutes, COI disclosures, budget, strategic plan). Add more as needed; remove any that don't apply.</p>
+
+    <h2 id="actions">Action Items</h2>
+    <p>The handbook builder's punch list. Items come from two places:</p>
+    <ul>
+      <li><b>Auto-generated</b> from Partial / No / Don't know answers on the Self-Assessment.</li>
+      <li><b>Manually added</b> via the input at the top of the Action Items page.</li>
+    </ul>
+    <p>Each item has a priority (High/Medium/Low), owner, due date, and a checkbox for completed. Completed items move to a separate section so the open list stays clean.</p>
+
+    <h2 id="build">Build Handbook</h2>
+    <p>The final step. Shows completeness statistics across all sections, then offers three outputs:</p>
+    <ul>
+      <li><b>Preview Handbook (HTML)</b> — opens the assembled handbook in a new tab, print-ready. Use your browser's File → Print → Save as PDF to make a PDF.</li>
+      <li><b>Download .html</b> — saves the HTML file to your computer.</li>
+      <li><b>Download .docx</b> — generates a real Microsoft Word document you can edit, share, or send for board adoption. The first time you click this, the tool loads the document-generation library (~200 KB, takes about a second on a decent connection).</li>
+    </ul>
+    <div class="callout tip"><b>Less than 50% complete?</b> The handbook will have placeholder text like "[Insert mission statement]" wherever you haven't filled in data. You can still build it — but consider it a draft until you've added more content.</div>
+
+    <h2 id="team">Team collaboration</h2>
+    <p>Multiple staff often contribute to the handbook — the Executive Director writes mission and history, the Treasurer reviews financials, the Secretary maintains the roster, the Chair signs off on policies. The team feature lets all of them work in the same handbook simultaneously.</p>
+    <h3>Roles</h3>
+    <ul>
+      <li><span class="role-pill pill-leader">Leader</span> — full access. Invites and removes members, edits the org profile, regenerates the team code, upgrades to Pro.</li>
+      <li><span class="role-pill pill-member">Member</span> — can view all handbook data and update any field. Cannot manage the team or change the org profile.</li>
+    </ul>
+    <h3>Inviting members</h3>
+    <p>The leader shares the 6-character team code (visible on the Team page). The teammate creates their own account, selects <b>Join an existing team</b>, and enters the code.</p>
+
+    <h2 id="pro">Pro vs Free</h2>
+    <table>
+      <tr><th>Feature</th><th>Free</th><th>Pro</th></tr>
+      <tr><td>Handbook builder</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>All 50 states</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>HTML + .docx output</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Self-assessment</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Team seats</td><td>3</td><td>Unlimited</td></tr>
+      <tr><td>Priority support</td><td>—</td><td>Yes</td></tr>
+      <tr><td>Price</td><td>$0</td><td>$29 / month</td></tr>
+    </table>
+
+    <h2 id="admin">For administrators</h2>
+    <p>Super-admin accounts have an <b>Admin Console</b> as their default view. From there, an admin can see every team in the system, view their handbook data, and impersonate a team for support purposes.</p>
+
+    <h2 id="nav">Navigation: Sign Out & Back to Dashboard</h2>
+    <p>Two utility buttons are available on every page:</p>
+    <ul>
+      <li><b>↩ Sign Out</b> — top-right corner of every page. Returns you to the sign-in screen.</li>
+      <li><b>← Dashboard</b> — top-left of every page <i>except</i> the Dashboard itself. Quick return to the home view.</li>
+    </ul>
+    <p>The sidebar nav is always available too — you can jump directly to any section without going through the dashboard.</p>
+
+    <h2 id="tips">Tips & best practices</h2>
+    <h3>Don't try to finish in one sitting</h3>
+    <p>Most organizations need 2–4 working sessions to fill in everything. The data saves automatically as you go.</p>
+
+    <h3>Get input from the right people</h3>
+    <p>Policies and procedures benefit from the Board Chair's review. Financials need the Treasurer. Programs need staff who run them. The team feature lets each owner update their own section.</p>
+
+    <h3>Have legal counsel review policies</h3>
+    <p>The boilerplate policies are good starting points, not legal advice. Especially for bylaws, conflict of interest, and executive compensation, have an attorney familiar with nonprofit law review before adoption.</p>
+
+    <h3>Re-generate periodically</h3>
+    <p>The handbook should be a living document. Update it whenever board composition changes, policies are amended, or financials are updated, then re-export. Distribute the updated version to all directors.</p>
+
+    <h2 id="disclaimer">Disclaimer</h2>
+    <p>This tool is a productivity aid for nonprofit governance. The boilerplate policy texts are based on commonly used IRS-recommended language but are not legal advice. State law and your specific organizational circumstances may require modifications. Always have a qualified attorney review any policy before adoption.</p>
+    <p>Build Your Club Academy is not a law firm, and use of this tool does not create an attorney-client relationship.</p>
+
+    <p style="margin-top:32px;padding-top:18px;border-top:1px solid var(--border);font-size:13px;color:var(--muted)">Build Your Club Academy · Board Handbook Builder User Guide</p>
+  </article>
+</div>
+
+<script>
+const sections = document.querySelectorAll('h2[id]');
+const links = document.querySelectorAll('.toc a');
+const linkByHash = {};
+links.forEach(l => { linkByHash['#'+l.getAttribute('href').slice(1)] = l; });
+function onScroll(){
+  let active = null;
+  const top = 100;
+  sections.forEach(s => { if (s.getBoundingClientRect().top <= top) active = s.id; });
+  links.forEach(l => l.classList.remove('active'));
+  if (active && linkByHash['#'+active]) linkByHash['#'+active].classList.add('active');
+}
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+</script>
+</body>
+</html>
