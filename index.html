@@ -1202,12 +1202,51 @@ function listTable(key, cols, labels, addLabel){
 
 let currentPage = 'dashboard';
 
+
+// ── Board Member Photos (separate list, keyed by name) ──
+function renderBoardPhotos(){
+  const photos = getList('boardPhotos');
+  if (photos.length === 0){
+    return `<div style="font-size:13px;color:var(--muted);font-style:italic;padding:12px;background:var(--light);border-radius:8px;margin-bottom:12px">No photos yet. Click "+ Add board photo" below.</div>
+      <button class="btn btn-teal" onclick="addBoardPhoto()">+ Add board photo</button>`;
+  }
+  return `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px">
+    ${photos.map((p,i) => `
+      <div style="border:1px solid var(--border);border-radius:10px;padding:14px;background:#fff">
+        <div class="field" style="margin-bottom:8px"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase">Name</label><input value="${(p.name||'').replace(/"/g,'&quot;')}" oninput="updateBoardPhoto(${i},'name',this.value)" style="width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px"/></div>
+        <div class="field" style="margin-bottom:8px"><label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase">Photo</label>
+          <input value="${(p.photoUrl||'').replace(/"/g,'&quot;')}" placeholder="Paste image URL OR upload below" oninput="updateBoardPhoto(${i},'photoUrl',this.value)" style="width:100%;padding:7px 8px;border:1px solid var(--border);border-radius:6px;font-size:13px"/>
+          <input type="file" accept="image/*" style="margin-top:6px;font-size:12px" onchange="uploadBoardPhoto(${i}, this)"/>
+        </div>
+        ${p.photoData ? `<div style="margin-top:8px"><img src="${p.photoData}" style="width:100%;max-width:200px;border-radius:8px;border:1px solid var(--border)"/><button class="btn btn-ghost" style="font-size:11px;margin-top:4px" onclick="updateBoardPhoto(${i},'photoData',''); navigate(currentPage)">Remove uploaded image</button></div>` : (p.photoUrl ? `<div style="margin-top:8px"><img src="${p.photoUrl.replace(/"/g,'&quot;')}" style="width:100%;max-width:200px;border-radius:8px;border:1px solid var(--border)" onerror="this.style.display='none'"/></div>` : '')}
+        <button class="btn btn-outline" style="font-size:11px;margin-top:8px" onclick="if(confirm('Remove this photo entry?')){removeBoardPhoto(${i});}">✕ Remove</button>
+      </div>
+    `).join('')}
+  </div>
+  <button class="btn btn-teal" style="margin-top:14px" onclick="addBoardPhoto()">+ Add board photo</button>`;
+}
+function addBoardPhoto(){ addListRow('boardPhotos', {name:'',photoUrl:'',photoData:''}); navigate(currentPage); }
+function updateBoardPhoto(idx, field, val){ editListRow('boardPhotos', idx, field, val); }
+function removeBoardPhoto(idx){ delListRow('boardPhotos', idx); navigate(currentPage); }
+function uploadBoardPhoto(idx, input){
+  const file = input.files[0]; if(!file) return;
+  if (file.size > 500*1024 && !confirm('Image is larger than 500KB. Continue?')) return;
+  const reader = new FileReader();
+  reader.onload = e => { editListRow('boardPhotos', idx, 'photoData', e.target.result); navigate(currentPage); };
+  reader.readAsDataURL(file);
+}
+
 function renderPeople(){
   document.getElementById('page-people').innerHTML = `
     <div class="page-header"><div><h1 class="page-title">Board & Officers</h1><div class="page-sub">Maps to Part II · roster, officers, key staff, advisors</div></div></div>
     <div class="section">
       <div class="section-title">Board of Directors Roster</div>
       ${listTable('roster', ROSTER_COLS, ROSTER_LABELS, 'Add board member')}
+    </div>
+    <div class="section">
+      <div class="section-title">Board Member Photos</div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:10px">Add a photo for each board member. Use the roster names above to keep things consistent.</p>
+      ${renderBoardPhotos()}
     </div>
     <div class="section">
       <div class="section-title">Officer Election History</div>
